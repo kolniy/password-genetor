@@ -3,6 +3,10 @@ const $btnGenerate = document.querySelector("#btn-generate");
 const $btnCopy = document.querySelector("#btn-copy");
 let savedPassword;
 
+const alerts = new CustomAlerts({
+  autoclose: 2000,
+});
+
 function generatePassword() {
   const chars =
     "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -22,5 +26,18 @@ $btnGenerate.addEventListener("click", () => {
 });
 
 $btnCopy.addEventListener("click", () => {
-  navigator.clipboard.writeText(savedPassword);
+  if (savedPassword) {
+    navigator.clipboard.writeText(savedPassword);
+    alerts.alert({
+      type: "info",
+      title: "Password Copied",
+      content: "Password Copied to Clipboard",
+    });
+  } else {
+    alerts.alert({
+      type: "danger",
+      title: "Password Not Copied",
+      content: "Password Not Found",
+    });
+  }
 });
