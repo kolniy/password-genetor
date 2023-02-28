@@ -21,4 +21,6 @@ $btnGenerate.addEventListener("click", () => {
   $inputField.value = savedPassword;
 });
 
-$btnCopy.addEventListener("click", () => {});
+$btnCopy.addEventListener("click", () => {
+  navigator.clipboard.writeText(savedPassword);
+});
